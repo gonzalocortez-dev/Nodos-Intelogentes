@@ -35,7 +35,7 @@ Cada envío del formulario agrega una fila en la pestaña **Consultas**.
 
 1. Entrá a [vercel.com/new](https://vercel.com/new)
 2. Importá el repo `gonzalocortez-dev/Nodos-Intelogentes`
-3. Framework: **FastAPI** (si no lo detecta solo)
+3. Framework Preset: **FastAPI** (en Project Settings → General, si no lo detecta solo)
 4. Root Directory: dejar vacío
 5. Cargá estas variables de entorno:
 
