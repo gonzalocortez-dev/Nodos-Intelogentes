@@ -46,11 +46,8 @@ async def send_to_google_sheet(record: dict) -> None:
 
     payload = dict(zip(HEADERS, _row(record)))
     body = json.dumps(payload, ensure_ascii=False)
-    headers = {"Content-Type": "application/json; charset=utf-8"}
+    headers = {"Content-Type": "text/plain;charset=utf-8"}
 
-    async with httpx.AsyncClient(timeout=15.0) as client:
-        response = await client.post(url, content=body, headers=headers, follow_redirects=False)
-        if response.status_code in {301, 302, 303, 307, 308}:
-            location = response.headers.get("location")
-            if location:
-                await client.post(location, content=body, headers=headers, follow_redirects=True)
+    async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
+        response = await client.post(url, content=body, headers=headers)
+        response.raise_for_status()
