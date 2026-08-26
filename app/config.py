@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     location: str = "Salta, Capital"
     site_url: str = "http://127.0.0.1:8000"
     n8n_webhook_url: str = ""
+    google_sheets_webhook_url: str = ""
 
     @property
     def canonical_url(self) -> str:

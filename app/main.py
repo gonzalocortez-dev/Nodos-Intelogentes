@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from app.config import BASE_DIR, STATIC_DIR, settings
 from app.excel_store import save_consulta
+from app.sheets import send_to_google_sheet
 
 SERVICIOS = {
     "camaras-ip": "Cámaras IP",
@@ -125,6 +126,11 @@ async def crear_consulta(payload: ConsultaIn):
         "origen": payload.origen,
     }
     save_consulta(record)
+
+    try:
+        await send_to_google_sheet(record)
+    except Exception:
+        pass
 
     if settings.n8n_webhook_url:
         try:
