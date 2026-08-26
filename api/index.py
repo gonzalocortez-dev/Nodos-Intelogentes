@@ -1,3 +1,9 @@
-from app.main import app
+from fastapi import FastAPI
 
-__all__ = ["app"]
+app = FastAPI(docs_url=None, redoc_url=None)
+
+
+@app.get("/")
+@app.get("/api")
+def health():
+    return {"ok": True, "service": "nodos-inteligentes"}
